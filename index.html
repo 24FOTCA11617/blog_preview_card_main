@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon"
+          type="image/png"
+          sizes="32x32"
+          href="./assets/images/favicon-32x32.png">
+
+    <title>Frontend Mentor | Blog Preview Card</title>
+
+    <style>
+
+        /* =========================================
+           RESET
+        ========================================= */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            min-height: 100%;
+        }
+
+
+        /* =========================================
+           BODY
+        ========================================= */
+
+        body {
+            min-height: 100vh;
+
+            font-family: Arial, Helvetica, sans-serif;
+
+            background: #f1f1f1;
+
+            color: #111111;
+
+            overflow-x: hidden;
+
+            position: relative;
+        }
+
+
+        /* =========================================
+           DECORATIVE BACKGROUND
+        ========================================= */
+
+        body::before {
+            content: "";
+
+            position: fixed;
+
+            top: -10px;
+            left: 19%;
+
+            width: 50px;
+            height: 110px;
+
+            background-image:
+                radial-gradient(
+                    circle,
+                    #f7b7b7 5px,
+                    transparent 6px
+                );
+
+            background-size: 15px 15px;
+
+            opacity: 0.65;
+
+            pointer-events: none;
+        }
+
+
+        body::after {
+            content: "";
+
+            position: fixed;
+
+            right: -20px;
+            top: 90px;
+
+            width: 90px;
+            height: 60px;
+
+            border-top: 5px solid #f4baba;
+
+            transform: rotate(45deg);
+
+            opacity: 0.65;
+
+            pointer-events: none;
+        }
+
+
+        /* =========================================
+           MAIN YELLOW AREA
+        ========================================= */
+
+        .main-section {
+
+            width: 86.5%;
+
+            height: 76vh;
+
+            min-height: 560px;
+
+            margin: 12vh auto 0;
+
+            background: #f4d04e;
+
+            position: relative;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            box-shadow:
+                0 18px 22px rgba(0, 0, 0, 0.18);
+
+            overflow: visible;
+        }
+
+
+        /* =========================================
+           BLOG CARD
+        ========================================= */
+
+        .card {
+
+            width: 250px;
+
+            min-height: 345px;
+
+            padding: 14px;
+
+            background: #ffffff;
+
+            border: 2px solid #111111;
+
+            border-radius: 12px;
+
+            box-shadow:
+                7px 7px 0 #111111;
+
+            position: relative;
+
+            z-index: 5;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+
+        .card:hover {
+
+            transform: translate(-2px, -2px);
+
+            box-shadow:
+                9px 9px 0 #111111;
+        }
+
+
+        /* =========================================
+           ARTICLE IMAGE
+        ========================================= */
+
+        .card-image {
+
+            width: 100%;
+
+            height: 130px;
+
+            display: block;
+
+            object-fit: cover;
+
+            border-radius: 7px;
+
+            margin-bottom: 13px;
+        }
+
+
+        /* =========================================
+           CATEGORY
+        ========================================= */
+
+        .category {
+
+            display: inline-block;
+
+            padding: 4px 8px;
+
+            margin-bottom: 8px;
+
+            background: #f4d04e;
+
+            border-radius: 3px;
+
+            font-size: 10px;
+
+            line-height: 1;
+
+            font-weight: 800;
+        }
+
+
+        /* =========================================
+           DATE
+        ========================================= */
+
+        .date {
+
+            margin: 0 0 9px;
+
+            font-size: 9px;
+
+            color: #333333;
+        }
+
+
+        /* =========================================
+           TITLE
+        ========================================= */
+
+        .title {
+
+            margin: 0 0 9px;
+
+            font-size: 17px;
+
+            line-height: 1.2;
+
+            font-weight: 800;
+        }
+
+
+        .title:hover {
+
+            color: #f4d04e;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================================
+           DESCRIPTION
+        ========================================= */
+
+        .description {
+
+            margin: 0 0 16px;
+
+            color: #6b6b6b;
+
+            font-size: 9px;
+
+            line-height: 1.45;
+        }
+
+
+        /* =========================================
+           AUTHOR
+        ========================================= */
+
+        .author {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+        }
+
+
+        .author-image {
+
+            width: 24px;
+
+            height: 24px;
+
+            border-radius: 50%;
+
+            object-fit: cover;
+        }
+
+
+        .author-name {
+
+            font-size: 10px;
+
+            font-weight: 800;
+        }
+
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        .attribution {
+
+            width: 100%;
+
+            margin: 25px 0 20px;
+
+            text-align: center;
+
+            font-size: 11px;
+
+            color: #555555;
+        }
+
+
+        .attribution a {
+
+            color: hsl(228, 45%, 44%);
+
+            text-decoration: none;
+        }
+
+
+        .attribution a:hover {
+
+            text-decoration: underline;
+        }
+
+
+        /* =========================================
+           DECORATIVE BLUE DOTS
+        ========================================= */
+
+        .main-section::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: -5px;
+
+            bottom: -85px;
+
+            width: 90px;
+
+            height: 55px;
+
+            background-image:
+                radial-gradient(
+                    circle,
+                    #65c1d0 5px,
+                    transparent 6px
+                );
+
+            background-size: 15px 15px;
+
+            transform: rotate(-15deg);
+
+            opacity: 0.9;
+        }
+
+
+        /* =========================================
+           DECORATIVE CURVE
+        ========================================= */
+
+        .main-section::before {
+
+            content: "";
+
+            position: absolute;
+
+            left: -75px;
+
+            top: 190px;
+
+            width: 90px;
+
+            height: 190px;
+
+            border: 6px solid #d9e6f3;
+
+            border-left-color: transparent;
+
+            border-radius: 50%;
+
+            opacity: 0.8;
+        }
+
+
+        /* =========================================
+           DESKTOP
+           1200px AND ABOVE
+        ========================================= */
+
+        @media (min-width: 1200px) {
+
+            .main-section {
+
+                width: 86.5%;
+
+                height: 76vh;
+
+                min-height: 560px;
+            }
+
+            .card {
+
+                width: 250px;
+
+                min-height: 345px;
+            }
+
+            .card-image {
+
+                height: 130px;
+            }
+
+        }
+
+
+        /* =========================================
+           TABLET
+           768px - 1199px
+        ========================================= */
+
+        @media (min-width: 768px) and (max-width: 1199px) {
+
+            .main-section {
+
+                width: 86%;
+
+                height: 72vh;
+
+                min-height: 500px;
+
+                margin-top: 10vh;
+            }
+
+
+            .card {
+
+                width: 245px;
+
+                min-height: 340px;
+
+                padding: 14px;
+            }
+
+
+            .card-image {
+
+                height: 125px;
+            }
+
+
+            .title {
+
+                font-size: 17px;
+            }
+
+
+            .description {
+
+                font-size: 9px;
+            }
+
+        }
+
+
+        /* =========================================
+           MOBILE
+           BELOW 768px
+        ========================================= */
+
+        @media (max-width: 767px) {
+
+            body {
+
+                min-height: 100vh;
+
+                padding-top: 20px;
+
+                padding-bottom: 20px;
+            }
+
+
+            body::before {
+
+                left: 8%;
+
+                width: 40px;
+
+                height: 90px;
+            }
+
+
+            body::after {
+
+                right: -35px;
+
+                top: 70px;
+            }
+
+
+            .main-section {
+
+                width: 90%;
+
+                height: 75vh;
+
+                min-height: 500px;
+
+                margin: 5vh auto 0;
+            }
+
+
+            .card {
+
+                width: 235px;
+
+                min-height: 325px;
+
+                padding: 13px;
+
+                border-radius: 11px;
+
+                box-shadow: 6px 6px 0 #111111;
+            }
+
+
+            .card-image {
+
+                height: 120px;
+
+                margin-bottom: 12px;
+            }
+
+
+            .category {
+
+                font-size: 9px;
+
+                padding: 4px 7px;
+
+                margin-bottom: 7px;
+            }
+
+
+            .date {
+
+                font-size: 8px;
+
+                margin-bottom: 8px;
+            }
+
+
+            .title {
+
+                font-size: 16px;
+
+                margin-bottom: 8px;
+            }
+
+
+            .description {
+
+                font-size: 8.5px;
+
+                margin-bottom: 14px;
+            }
+
+
+            .author-image {
+
+                width: 22px;
+
+                height: 22px;
+            }
+
+
+            .author-name {
+
+                font-size: 9px;
+            }
+
+
+            .main-section::before {
+
+                display: none;
+            }
+
+
+            .main-section::after {
+
+                left: 10px;
+
+                bottom: -65px;
+
+                width: 65px;
+
+                height: 45px;
+
+                background-size: 12px 12px;
+            }
+
+
+            .attribution {
+
+                margin-top: 90px;
+
+                padding: 0 15px;
+
+                font-size: 10px;
+            }
+
+        }
+
+
+        /* =========================================
+           SMALL MOBILE
+           BELOW 400px
+        ========================================= */
+
+        @media (max-width: 400px) {
+
+            .main-section {
+
+                width: 92%;
+
+                height: 72vh;
+
+                min-height: 470px;
+
+                margin-top: 4vh;
+            }
+
+
+            .card {
+
+                width: 215px;
+
+                min-height: 305px;
+
+                padding: 12px;
+
+                box-shadow: 5px 5px 0 #111111;
+            }
+
+
+            .card-image {
+
+                height: 108px;
+            }
+
+
+            .title {
+
+                font-size: 15px;
+            }
+
+
+            .description {
+
+                font-size: 8px;
+            }
+
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- =========================================
+         YELLOW MAIN SECTION
+    ========================================= -->
+
+    <main class="main-section">
+
+
+        <!-- =====================================
+             BLOG PREVIEW CARD
+        ====================================== -->
+
+        <article class="card">
+
+
+            <!-- Article Image -->
+
+            <img
+                class="card-image"
+                src="./assets/images/illustration-article.svg"
+                alt="HTML and CSS illustration"
+            >
+
+
+            <!-- Category -->
+
+            <div class="category">
+                Learning
+            </div>
+
+
+            <!-- Published Date -->
+
+            <p class="date">
+                Published 21 Dec 2023
+            </p>
+
+
+            <!-- Title -->
+
+            <h1 class="title">
+                HTML &amp; CSS foundations
+            </h1>
+
+
+            <!-- Description -->
+
+            <p class="description">
+                These languages are the backbone of every website,
+                defining structure, content, and presentation.
+            </p>
+
+
+            <!-- Author -->
+
+            <div class="author">
+
+                <img
+                    class="author-image"
+                    src="./assets/images/image-avatar.webp"
+                    alt="Greg Hooper"
+                >
+
+                <span class="author-name">
+                    Greg Hooper
+                </span>
+
+            </div>
+
+
+        </article>
+
+
+    </main>
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================= -->
+
+    <footer class="attribution">
+
+        Challenge by
+
+        <a
+            href="https://www.frontendmentor.io?ref=challenge"
+            target="_blank">
+            Frontend Mentor
+        </a>.
+
+        Coded by
+
+        <a href="#">
+            Pankaj Kumar Kewat
+        </a>.
+
+    </footer>
+
+
+</body>
+
+</html>
